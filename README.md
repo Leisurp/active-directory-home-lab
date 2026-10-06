@@ -1,8 +1,6 @@
 # active-directory-home-lab
 Windows Server 2019 Active Directory home lab with AD DS, DNS, DHCP, NAT, PowerShell user automation and a domain-joined Windows 10 client.
 
-# Active Directory Home Lab
-
 ## Overview
 
 I built this Active Directory home lab in Oracle VirtualBox to get hands-on experience with Windows Server, Active Directory and basic network administration.
@@ -143,21 +141,6 @@ I ran `whoami` to verify that the Windows session was authenticated using the Ac
 
 
 
-Created domain
-      ↓
-Created users with PowerShell
-      ↓
-Created separate Windows client
-      ↓
-Client received networking from server
-      ↓
-Client joined domain
-      ↓
-Domain user authenticated on client
-      ↓
-whoami confirms domain\user
-
-
 
 ## Skills Demonstrated
 
@@ -178,4 +161,4 @@ whoami confirms domain\user
 
 ## Acknowledgements
 
-This project was completed by following and adapting the Active Directory Home Lab guide created by laabousse. I documented my own implementation and testing as I worked through the lab.
+This project was completed by following and adapting the [Active Directory Home Lab guide by laabousse](https://github.com/laabousse/Active-Directory-Home-Lab). I documented my own implementation and testing as I worked through the lab.
