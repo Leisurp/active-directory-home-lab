@@ -1,4 +1,6 @@
+
 # active-directory-home-lab
+
 Windows Server 2019 Active Directory home lab with AD DS, DNS, DHCP, NAT, PowerShell user automation and a domain-joined Windows 10 client.
 
 ## Overview
@@ -8,6 +10,7 @@ I built this Active Directory home lab in Oracle VirtualBox to get hands-on expe
 The lab uses Windows Server 2019 as a domain controller and Windows 10 Enterprise as a domain client. I configured Active Directory Domain Services, DNS, DHCP and NAT, used PowerShell to automate user creation, joined a Windows 10 client to the domain, and tested logging in with a domain user account.
 
 This project was completed by following and adapting the Active Directory Home Lab guide by laabousse.
+
 ## Lab Environment
 
 - Oracle VirtualBox
@@ -28,15 +31,13 @@ I configured the internal network interface with a static IP address of `172.16.
 
 The domain controller also uses itself as the DNS server because DNS is provided alongside Active Directory.
 
-
-
 ## 2. Installing Active Directory Domain Services
 
 ![AD DS Installation](screenshots/02-ad-ds-install.png)
 
 I installed the Active Directory Domain Services (AD DS) role through Server Manager to prepare the Windows Server to act as the domain controller for the lab.
 
-### Promoting the Server to a Domain Controller
+## 3. Promoting the Server to a Domain Controller
 
 ![Domain Controller Configuration](screenshots/03-domain-controller-config.png)
 
@@ -44,7 +45,7 @@ After installing AD DS, I promoted the Windows Server to a domain controller and
 
 This provides the central domain used to manage and authenticate the users and computers in the lab.
 
-### Creating a Dedicated Domain Administrator
+## 4. Creating a Dedicated Domain Administrator
 
 ![Domain Administrator Account](screenshots/04-domain-admin-account.png)
 
@@ -52,9 +53,7 @@ I created a dedicated administrator account in Active Directory instead of conti
 
 I added the account to the Domain Admins group so it could be used for administrative tasks across the domain.
 
-
-
-## 3. Configuring RAS and NAT
+## 5. Configuring RAS and NAT
 
 ![RAS and NAT Configuration](screenshots/05-ras-nat-config.png)
 
@@ -62,9 +61,7 @@ I configured Remote Access and Network Address Translation (NAT) on the domain c
 
 This allows the Windows 10 client on the private internal network to access the internet through the domain controller instead of connecting directly through VirtualBox NAT.
 
-
-
-## 4. Configuring DHCP
+## 6. Configuring DHCP
 
 ![DHCP Configuration](screenshots/06-dhcp-config.png)
 
@@ -72,9 +69,7 @@ I installed and configured DHCP on the domain controller so clients on the inter
 
 I created and activated a DHCP scope for the lab network and authorized the DHCP server in Active Directory.
 
-
-
-## 5. Automating Active Directory User Creation
+## 7. Automating Active Directory User Creation
 
 ![PowerShell User Creation Script](screenshots/07-powershell-user-script.png)
 
@@ -82,28 +77,23 @@ Instead of manually creating each test user, I used a PowerShell script to autom
 
 The script reads names from a text file, separates the first and last names, generates a username and creates each account inside the `_USERS` Organizational Unit.
 
-
-### Running the PowerShell Script
+## 8. Running the PowerShell Script
 
 ![PowerShell User Generation](screenshots/08-powershell-user-generation.png)
 
 I ran the script through PowerShell ISE on the domain controller and monitored the output as the Active Directory accounts were automatically generated.
 
-### Verifying the Created Users
+## 9. Verifying the Created Users
 
 ![Created Active Directory Users](screenshots/09-ad-users-created.png)
 
 After running the script, I opened Active Directory Users and Computers and verified that the generated accounts had been successfully created inside the `_USERS` Organizational Unit.
 
-
-
-## 6. Configuring the Windows 10 Client
+## 10. Configuring the Windows 10 Client
 
 I created a Windows 10 Enterprise virtual machine and connected it to the isolated internal VirtualBox network rather than directly connecting it through VirtualBox NAT.
 
 This means the client relies on the Windows Server for its network configuration and access to the rest of the network.
-
-### Verifying Client Network Configuration
 
 ![Client IP Configuration](screenshots/10-client-ipconfig.png)
 
@@ -111,9 +101,7 @@ I used `ipconfig` on the Windows 10 client to verify that it had automatically r
 
 This confirmed that the client was successfully communicating with the domain controller and receiving an IP address from the DHCP scope I configured earlier.
 
-
-
-## 7. Joining the Windows 10 Client to the Domain
+## 11. Joining the Windows 10 Client to the Domain
 
 ![Windows 10 Domain Join](screenshots/11-domain-join.png)
 
@@ -121,7 +109,7 @@ I joined the Windows 10 client to the Active Directory domain using the dedicate
 
 After successfully joining the domain, I restarted the client to complete the process.
 
-### Verifying the DHCP Lease
+## 12. Verifying the DHCP Lease
 
 ![Client DHCP Lease](screenshots/12-client-dhcp-lease.png)
 
@@ -129,18 +117,13 @@ Back on the domain controller, I checked the DHCP address leases and verified th
 
 This confirmed that the DHCP configuration created earlier was working correctly with the client machine.
 
-
-
-## 8. Testing Domain User Authentication
+## 13. Testing Domain User Authentication
 
 ![Domain User Login](screenshots/13-domain-user-login.png)
 
 Finally, I logged into the Windows 10 client using one of the domain user accounts that was created earlier with the PowerShell script.
 
 I ran `whoami` to verify that the Windows session was authenticated using the Active Directory domain account.
-
-
-
 
 ## Skills Demonstrated
 
@@ -156,8 +139,6 @@ I ran `whoami` to verify that the Windows session was authenticated using the Ac
 - Domain user authentication
 - VirtualBox virtual networking
 - Basic network testing and troubleshooting
-
-
 
 ## Acknowledgements
 
